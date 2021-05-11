@@ -1,0 +1,23 @@
+<html>
+  <head>
+  <link rel="stylesheet" href="https://bootswatch.com/4/united/bootstrap.min.css">
+
+  </head>
+  <body>
+    <div class="navbar navbar-light bg-primary">
+      <div class="navbar-container">
+        <div class="navbar-brand"><a class="text-white" href="/">Ultra Secure App</a></div>
+      </div>
+    </div>
+
+    <div class="container" style="margin-top: 2em">
+      {% for msg in get_flashed_messages() %}
+        <div class="alert alert-danger">{{ msg }}</div>
+      {% endfor %}  
+
+      {% block content %}
+      {% endblock %}
+    </div>
+  
+  </body>
+</html>
