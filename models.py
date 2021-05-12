@@ -28,22 +28,24 @@ class User(db.Model):
         hashed = bcrypt.generate_password_hash(password)
         hashed_utf8 = hashed.decode("utf8")
         return cls(username=username, password=hashed_utf8)
-    
+
     @classmethod
     def authenticate(cls, username, password):
         username = User.query.filter_by(username=username).first()
         if username and bcrypt.check_password_hash(username.password, password):
             return username
-        else: 
+        else:
             return False
 
 
-class feedback(db.Model):
+class Feedback(db.Model):
     __tablename__ = "feedback"
     id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
     title = db.Column(db.Text, nullable=False, length=100)
     content = db.column(db.Text, nullable=False)
-    username = db.column()
+    username = db.column(
+        db.string(20), db.ForeignKey('User.username'),nullable=False
+    )
 
 
 
